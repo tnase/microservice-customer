@@ -8,6 +8,6 @@ import java.util.List;
 import java.util.UUID;
 
 public interface CustomerRepository extends JpaRepository<CustomerEntity, UUID> {
-    @Query("SELECT t FROM CustomerEntity c WHERE c.date_deleted IS NULL")
+    @Query("SELECT c FROM CustomerEntity c WHERE c.date_deleted IS NULL")
     List<CustomerEntity> findCustomersNotDeleted();
 }
