@@ -73,6 +73,7 @@ public class CustomerDaoImpl implements CustomerDao {
             CustomerEntity existingCustomer = customerRepository.findById(customer.getIdCustomer()).isPresent() ? customerRepository.findById(customer.getIdCustomer()).get() : null;
             if (existingCustomer != null) {
                 customer.setDate_update(new Date());
+                customer.setIdUser(existingCustomer.getIdUser());
                 existingCustomer = customerRepository.save(customer);
             } else {
                 responseVo.setErrorsMsg(CustomerConstants.CUSTOMER_NOT_FOUND);
