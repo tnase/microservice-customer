@@ -12,6 +12,7 @@ public interface CustomerDao {
     ResponseEntity<ResponseVo> getCustomer(UUID idCustomer);
     ResponseEntity<ResponseVo> lockOrUnlockCustomer(UUID idCustomer,Boolean lock);
     ResponseEntity<ResponseVo> updateCustomer(CustomerEntity customer);
+    ResponseEntity<ResponseVo> deleteCustomer(UUID idTransporter);
 
 
 }

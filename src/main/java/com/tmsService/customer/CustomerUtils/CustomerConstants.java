@@ -8,5 +8,6 @@ public class CustomerConstants {
     public static final String NULL_LOCK_ACTION = "cet Client n'existe pas !";
     public static final String NULL_CUSTOMER_OR_NOT_ID = "Ce client est null ou n'as pas d'identifiant";
     public static final String SUCCESS_CREATE_CUSTOMER = "Client creer avec success";
+    public static final String SUCCESS_DELETE_CUSTOMER = "Client supprimer avec success";
 
 }

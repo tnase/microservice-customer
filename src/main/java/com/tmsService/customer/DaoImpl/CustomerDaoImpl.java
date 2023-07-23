@@ -20,6 +20,7 @@ public class CustomerDaoImpl implements CustomerDao {
     @Override
     public ResponseEntity<ResponseVo> addCustomer(CustomerEntity customer) {
         ResponseVo responseVo = new ResponseVo();
+        customer.setIdUser(UUID.randomUUID());
         responseVo.setVo(customerRepository.save(customer));
         responseVo.setSuccessMsg(CustomerConstants.SUCCESS_CREATE_CUSTOMER);
         return ResponseEntity.ok(responseVo);
@@ -28,7 +29,7 @@ public class CustomerDaoImpl implements CustomerDao {
     @Override
     public ResponseEntity<ResponseVo> getCustomers() {
         ResponseVo responseVo = new ResponseVo();
-        responseVo.setVo(customerRepository.findAll());
+        responseVo.setVo(customerRepository.findCustomersNotDeleted());
         return ResponseEntity.ok(responseVo);
     }
 
@@ -80,6 +81,21 @@ public class CustomerDaoImpl implements CustomerDao {
         } else {
             responseVo.setErrorsMsg(CustomerConstants.NULL_CUSTOMER_OR_NOT_ID);
             responseVo.setVo(customer);
+        }
+        return ResponseEntity.ok(responseVo);
+    }
+
+    @Override
+    public ResponseEntity<ResponseVo> deleteCustomer(UUID idTransporter) {
+        ResponseVo responseVo=new ResponseVo();
+        CustomerEntity transporter=customerRepository.findById(idTransporter).isPresent()?customerRepository.findById(idTransporter).get():null;
+        if(transporter==null){
+            responseVo.setWarningMsg(CustomerConstants.CUSTOMER_NOT_FOUND);
+        }else{
+            transporter.setDate_deleted(new Date());
+            transporter.setDate_update(new Date());
+            customerRepository.save(transporter);
+            responseVo.setSuccessMsg(CustomerConstants.SUCCESS_DELETE_CUSTOMER);
         }
         return ResponseEntity.ok(responseVo);
     }

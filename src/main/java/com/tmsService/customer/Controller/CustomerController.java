@@ -36,10 +36,15 @@ public class CustomerController {
         return customerDao.updateCustomer(customer);
     }
 
-    @PutMapping("/lock/{idCustomer}")
-    public ResponseEntity<ResponseVo> lockCustomer(@PathVariable UUID idCustomer, @RequestBody Boolean lock) {
+    @PutMapping("/lock/{idCustomer}/{lock}")
+    public ResponseEntity<ResponseVo> lockCustomer(@PathVariable UUID idCustomer, @PathVariable  Boolean lock) {
         return customerDao.lockOrUnlockCustomer(idCustomer, lock);
     }
+    @PutMapping("/{idCustomer}")
+    public  ResponseEntity deleteTransporter(@PathVariable UUID idCustomer){
+        return customerDao.deleteCustomer(idCustomer) ;
+    }
+
 
 
 }

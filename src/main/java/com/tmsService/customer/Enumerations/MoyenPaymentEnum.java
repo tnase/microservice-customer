@@ -1,5 +1,6 @@
 package com.tmsService.customer.Enumerations;
 
+import com.fasterxml.jackson.annotation.JsonValue;
 import com.tmsService.customer.CustomerUtils.CustomerConstants;
 
 public enum MoyenPaymentEnum {
@@ -11,7 +12,7 @@ public enum MoyenPaymentEnum {
     private MoyenPaymentEnum(String libelle) {
         this.libelle = libelle;
     }
-
+    @JsonValue
     public String getLibelle() {
         return libelle;
     }
