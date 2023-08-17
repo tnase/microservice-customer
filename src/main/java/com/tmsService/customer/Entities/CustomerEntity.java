@@ -30,6 +30,7 @@ public class CustomerEntity {
     private String pays;
     private String phoneNumber;
     private String Fax;
+    private String ville;
     private String numeroSiret;
     private String delaisPayment;
     @Column(unique = true)
