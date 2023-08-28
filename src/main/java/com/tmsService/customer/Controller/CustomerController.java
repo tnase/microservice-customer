@@ -18,17 +18,17 @@ public class CustomerController {
     private CustomerDao customerDao;
 
     @GetMapping
-    public ResponseEntity getAllCustomers() {
+    public ResponseEntity<ResponseVo> getAllCustomers() {
         return customerDao.getCustomers();
     }
 
     @GetMapping("/{idCustomer}")
-    public ResponseEntity getCustomerById(@PathVariable UUID idCustomer) {
+    public ResponseEntity<ResponseVo> getCustomerById(@PathVariable UUID idCustomer) {
         return customerDao.getCustomer(idCustomer);
     }
 
     @PostMapping
-    public ResponseEntity createCustomer(@RequestBody CustomerEntity customer) {
+    public ResponseEntity<ResponseVo> createCustomer(@RequestBody CustomerEntity customer) {
         return customerDao.addCustomer(customer);
     }
 
@@ -42,10 +42,24 @@ public class CustomerController {
         return customerDao.lockOrUnlockCustomer(idCustomer, lock);
     }
     @PutMapping("/{idCustomer}")
-    public  ResponseEntity deleteTransporter(@PathVariable UUID idCustomer){
+    public  ResponseEntity<ResponseVo> deleteTransporter(@PathVariable UUID idCustomer){
         return customerDao.deleteCustomer(idCustomer) ;
     }
+    /**
+     * Retrieves customers based on the provided key search.
+     *
+     * @param  keySearch  the key to search for customers
+     * @return            the response containing the found customers
+     */
+    @GetMapping("/find/{keySearch}")
+    public ResponseEntity<ResponseVo> findCustomersByTvaOrReasonSocialeIgnoreCase(@PathVariable String keySearch) {
+        return customerDao.findCustomersByTvaOrReasonSocialeIgnoreCase(keySearch);
+    }
 
+    @GetMapping("/find/ids/{keySearch}")
+    public ResponseEntity<ResponseVo> findIdCustomersByReasonSocialeIgnoreCase(@PathVariable String keySearch) {
+        return customerDao.findIdCustomersByReasonSocialeIgnoreCase(keySearch);
+    }
 
 
 }
